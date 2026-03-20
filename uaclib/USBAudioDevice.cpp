@@ -421,7 +421,7 @@ bool USBAudioDevice::LoadBootCode( )
 {
 
 	char FileLocation[_MAX_PATH];
-	strcpy(FileLocation, FolderLocation);
+	strcpy_s(FileLocation, _MAX_PATH, FolderLocation);
 
 	USBFirmwareEndpoint* FWEndpoint = FindFWDest();
 
@@ -586,7 +586,7 @@ bool USBAudioDevice::PostBCAControl12( unsigned char B0, unsigned char B1, unsig
 bool USBAudioDevice::LoadFPGACode( )
 {
 	char FileLocation[_MAX_PATH];
-	strcpy(FileLocation, FolderLocation);
+	strcpy_s(FileLocation, _MAX_PATH, FolderLocation);
 
 
 	if (!FirmwareLoaded)

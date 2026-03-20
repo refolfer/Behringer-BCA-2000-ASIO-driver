@@ -32,7 +32,7 @@ void debugPrintf(const char *szFormat, ...)
     char str[4096];
     va_list argptr;
     va_start(argptr, szFormat);
-    vsprintf(str, szFormat, argptr);
+    vsprintf_s(str, 4096, szFormat, argptr);
     va_end(argptr);
 
     OutputDebugString(str);
@@ -114,7 +114,7 @@ HRESULT _stdcall DllRegisterServer()
 
 	if (rc) {
 		memset(errstr, 0, sizeof(errstr));
-		sprintf(errstr, "Register Server failed ! (%d)", rc);
+		sprintf_s(errstr, 128, "Register Server failed ! (%d)", rc);
 		MessageBox(0,(LPCTSTR)errstr, (LPCTSTR)driverDescriptionLong, MB_OK);
 		return -1;
 	}
@@ -134,7 +134,7 @@ HRESULT _stdcall DllUnregisterServer()
 
 	if (rc) {
 		memset(errstr, 0, sizeof(errstr));
-		sprintf(errstr,"Unregister Server failed ! (%d)",rc);
+		sprintf_s(errstr, 128,"Unregister Server failed ! (%d)",rc);
 		MessageBox(0,(LPCTSTR)errstr, (LPCTSTR)driverDescriptionLong, MB_OK);
 		return -1;
 	}
@@ -213,7 +213,7 @@ AsioUAC2::~AsioUAC2 ()
 //------------------------------------------------------------------------------------------
 void AsioUAC2::getDriverName (char *name)
 {
-	strcpy (name, driverDescriptionLong);
+	strcpy_s (name, 32, driverDescriptionLong);
 }
 
 //------------------------------------------------------------------------------------------
@@ -225,7 +225,7 @@ long AsioUAC2::getDriverVersion ()
 //------------------------------------------------------------------------------------------
 void AsioUAC2::getErrorMessage (char *string)
 {
-	strcpy (string, errorMessage);
+	strcpy_s (string, 128, errorMessage);
 }
 
 //------------------------------------------------------------------------------------------
@@ -487,7 +487,7 @@ ASIOError AsioUAC2::getClockSources (ASIOClockSource *clocks, long *numSources)
 	clocks->associatedChannel = -1;
 	clocks->associatedGroup = -1;
 	clocks->isCurrentSource = ASIOTrue;
-	strcpy(clocks->name, "Internal");
+	strcpy_s(clocks->name, 32, "Internal");
 	*numSources = 1;
 #ifdef _ENABLE_TRACE
 	debugPrintf("ASIOUAC: Get clock source req\n");
@@ -588,7 +588,7 @@ ASIOError AsioUAC2::getChannelInfo (ASIOChannelInfo *info)
 			}
 		}
 	}
-	sprintf(info->name, "UAC2 %d", info->channel);
+	sprintf_s(info->name, 32, "UAC2 %d", info->channel);
 	return ASE_OK;
 }
 
