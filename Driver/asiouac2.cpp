@@ -769,7 +769,7 @@ bool AsioUAC2::inputOpen ()
 	if(!m_device)
 		return false;
 
-	m_inputSampleSize = m_device->GetADCSubslotSize();
+	m_inputSampleSize = (size_t)m_device->GetADCSubslotSize();
 
 	m_NumInputs = m_device->GetInputChannelNumber();
 	if(inputBuffers)
@@ -825,7 +825,7 @@ bool AsioUAC2::outputOpen()
 	if(!m_device)
 		return false;
 
-	m_outputSampleSize = m_device->GetDACSubslotSize();
+	m_outputSampleSize = (size_t)m_device->GetDACSubslotSize();
 
 	m_NumOutputs = m_device->GetOutputChannelNumber();
 	if(outputBuffers)

@@ -5,6 +5,9 @@
 // C# libusbK Bindings
 // Auto-generated on: 01.28.2012
 //
+// NOTE: Hard-coded structure offsets (ofs*) may differ between 32-bit and 64-bit.
+// For Windows 11 64-bit compatibility, consider using Marshal.OffsetOf() instead.
+//
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
 //

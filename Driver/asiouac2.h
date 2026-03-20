@@ -160,8 +160,8 @@ private:
 
 	int m_NumInputs;
 	int m_NumOutputs;
-	int m_inputSampleSize;
-	int m_outputSampleSize;
+	size_t m_inputSampleSize;
+	size_t m_outputSampleSize;
 	char **inputBuffers;
 	char **outputBuffers;
 	long *inMap;

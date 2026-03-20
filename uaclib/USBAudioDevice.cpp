@@ -42,6 +42,7 @@
 
 
 #include "USBAudioDevice.h"
+#include <string>
 
 bool USBAudioDevice::FirmwareLoaded = false;
 
@@ -525,17 +526,15 @@ bool USBAudioDevice::PostBCACmd( unsigned char Cmd, unsigned char Len, unsigned 
 #ifdef _ENABLE_TRACE
 	if (!SuppressDebug)
 	{
-		char t[300];
-		char *p = t;
-		sprintf(p, "Sending Cmd 0x%02.2X len 0x%02.2X: ", Cmd, Len );
-		p += strlen(p);
-		for (int i = 0; i < 52; i++)
+		std::string t = "Sending Cmd 0x" + std::to_string(Cmd) + " len 0x" + std::to_string(Len) + ": ";
+		for (int i = 0; i < 52 && i < Len; i++)
 		{
-			sprintf(p, "%02.2X ", buf[i] );
-			p += strlen(p);
+			char bufstr[10];
+			sprintf_s(bufstr, 10, "%02.2X ", buf[i]);
+			t += bufstr;
 		}
 
-		debugPrintf("ASIOUAC: %s\n", t );
+		debugPrintf("ASIOUAC: %s\n", t.c_str() );
 	}
 #endif
 
